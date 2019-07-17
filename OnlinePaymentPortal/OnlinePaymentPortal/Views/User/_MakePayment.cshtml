@@ -1,0 +1,105 @@
+﻿@model TransactionsViewModel
+
+
+
+
+
+@using (Html.BeginForm("MakePayment", "User", FormMethod.Post))
+{
+    <link rel="stylesheet" href="~/vendor/select2/select2.min.css" />
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModal-label">NEW TRANSACTION</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form autocomplete="off" class="col-lg-8" asp-area="Administration" asp-controller="Client" asp-action="AddClient" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>PayerAccount</label>
+                            <input asp-for="@Model.PayerAccount" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="@Model.PayerAccountId" class="form-control" hidden />
+                        </div>
+                        <div class="form-group">
+                            <label>PayerClientName</label>
+                            <input asp-for="@Model.PayerClientName" class="form-control" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.PayeeAccount"></label>
+                            <select class="mySelect2" , asp-for="@Model.PayeeAccountId"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.PayeeClientName"></label>
+                            <input disabled asp-for="@Model.PayeeClientName" class="form-control" />
+                            <span asp-validation-for="@Model.PayeeClientName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.PaymentDescription"></label>
+                            <input asp-for="@Model.PaymentDescription" class="form-control" />
+                            <span asp-validation-for="@Model.PaymentDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Ammount"></label>
+                            <input asp-for="@Model.Ammount" class="form-control" />
+                            <span asp-validation-for="@Model.Ammount" class="text-danger"></span>
+                        </div>
+
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="btnOK" onclick="">OK</button>
+                    <button class="btn btn-default" data-dismiss="modal" id="btnCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".mySelect2").select2({
+                placeholder: "Select account number",
+                allowClear: true,
+                theme: "classic",
+                ajax: {
+                    url: "/User/GetAccounts",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            searchItem: params.term
+                        };
+                    },
+                    processResults: function (data, params) {
+                        return {
+                            results: data
+                        };
+                    }
+                }
+            });
+        });
+
+        $(".mySelect2").on("change", function () {
+            var accountNumber = $(this).val();
+            //console.log(accountNumber);
+            var url = "/User/GetClientName?accountId=" + accountNumber
+            $.get(url)
+                .done(function (responseData) {
+                    $("#PayeeClientName").val(responseData.message)
+                })
+        })
+    </script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}
+
+
+

@@ -1,0 +1,45 @@
+﻿@model BannerViewModel
+
+@using Microsoft.Extensions.Primitives;
+
+@{
+    //TODO: AJAX FOR SHOWING PICTURE
+}
+<h1 class="mb-5">ADD NEW BANNER</h1>
+
+<div class="row">
+
+    <form class="table-responsive-sm" asp-area="Administration" asp-controller="Banner" asp-action="AddBanner" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="@Model.StartDate"></label>
+            <input asp-for="@Model.StartDate" class="form-control" />
+            <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EndDate"></label>
+            <input asp-for="@Model.EndDate" class="form-control" />
+            <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.ImagePath"></label>
+            <input asp-for="@Model.ImagePath" type="file" class="btn btn-outline-success" name="pic" /><br />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.BannerLink"></label>
+            <input asp-for="@Model.BannerLink" class="form-control" />
+            <span asp-validation-for="@Model.BannerLink" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-success">Add Banner</button>
+            @{ var referrer = this.Context.Request.Headers["Referer"]; }
+            @if (referrer != default(StringValues))
+            {
+                <a href="@referrer.ToString()" class="btn btn-default">Go Back</a>
+            }
+        </div>
+    </form>
+</div>
+
+
+
+

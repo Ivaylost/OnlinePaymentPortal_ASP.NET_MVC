@@ -1,0 +1,34 @@
+﻿@model DetailsViewModels
+@using Microsoft.Extensions.Primitives;
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h3><b>Banner</b></h3>
+            </th>
+            <th>
+                <h3><b>Details</b></h3>
+            </th>
+        </tr>
+    </thead>
+    <tr>
+        <td>
+            <img src="@Url.Content(Model.ImagePath)" alt="Ops..Something went wrong" height="250" width="250" />
+        </td>
+        <td>
+            <p><h4>Start Date: @Model.StartDate</h4></p>
+            <p><h4>End Date: @Model.EndDate</h4></p>
+            <p><h4>Banner Link: @Model.BannerLink</h4></p>
+        </td>
+
+    </tr>
+</table>
+<a asp-area="Administration" asp-controller="Banner" asp-action="Edit" asp-route-id="@Model.Id">
+    <input type="button" class="btn btn-outline-success" value="EDIT" />
+</a>
+<a asp-area="Administration" asp-controller="Banner" asp-action="Delete" asp-route-id="@Model.Id">
+    <input type="button" class="btn btn-outline-danger" value="DELETE" />
+</a>
+
+<button type"button" class="btn btn-outline-dark" onclick="history.go(-1);">Go Back</button>

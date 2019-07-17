@@ -1,0 +1,37 @@
+﻿@model AccountViewModel
+@using Microsoft.Extensions.Primitives;
+
+@using (Html.BeginForm("EditNickName", "User", FormMethod.Post))
+{
+    <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModal-label">SELECT NEW NICKNAME</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="col-lg-8" asp-area="Administration" asp-controller="Client" asp-action="AddClient" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input asp-for="@Model.Id" class="form-control" hidden />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.NickName"></label>
+                            <input asp-for="@Model.NickName" class="form-control" />
+                            <span asp-validation-for="@Model.NickName" class="text-danger"></span>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="btnOK" onclick="">OK</button>
+                    <button class="btn btn-default" data-dismiss="modal" id="btnCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

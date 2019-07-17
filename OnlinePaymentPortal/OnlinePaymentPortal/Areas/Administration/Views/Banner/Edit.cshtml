@@ -1,0 +1,55 @@
+﻿@model DetailsViewModels
+@using Microsoft.Extensions.Primitives;
+
+@{
+//TODO: AJAX FOR SHOWING PICTURE
+        }
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h3><b>Banner</b></h3>
+            </th>
+            <th>
+                <h3><b>Details</b></h3>
+            </th>
+        </tr>
+    </thead>
+    <tr>
+        <form class="table-responsive-sm"asp-area="Administration" asp-controller="Banner" asp-action="Edit" enctype="multipart/form-data">
+            <td>
+                <div class="form-group">
+                    @*<img src="@Url.Content(Model.ImagePath)" alt="Ops..Something went wrong" height="250" width="250" />*@
+                    <label asp-for="@Model.ImagePath"></label>
+                    <input asp-for="@Model.ImagePath" type="file" class="btn btn-outline-success" name="pic" /><br />
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label asp-for="@Model.StartDate"></label>
+                    <input asp-for="@Model.StartDate" class="form-control" />
+                    <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.EndDate"></label>
+                    <input asp-for="@Model.EndDate" class="form-control" />
+                    <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.BannerLink"></label>
+                    <input asp-for="@Model.BannerLink" class="form-control" />
+                    <span asp-validation-for="@Model.BannerLink" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-success">SUBMIT</button>
+                    @{ var referrer = this.Context.Request.Headers["Referer"]; }
+                    @if (referrer != default(StringValues))
+                    {
+                        <a href="@referrer.ToString()" class="btn btn-outline-secondary">Go Back</a>
+                    }
+                </div>
+            </td>
+        </form>
+    </tr>
+</table>

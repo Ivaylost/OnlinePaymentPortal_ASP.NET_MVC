@@ -1,0 +1,32 @@
+﻿@model ClientViewModel
+
+@using (Html.BeginForm("AddClientAsync", "Client", FormMethod.Post))
+{
+    <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModal-label">Enter Client Name</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="col-lg-8" asp-area="Administration" asp-controller="Client" asp-action="AddClient" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="@Model.Name"></label>
+                            <input asp-for="@Model.Name" class="form-control" />
+                            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="btnOK" onclick="">OK</button>
+                    <button class="btn btn-default" data-dismiss="modal" id="btnCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="~/Areas/Administration/_ViewImports.cshtml" />
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

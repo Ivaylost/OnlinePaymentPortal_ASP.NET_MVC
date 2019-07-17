@@ -1,0 +1,48 @@
+﻿@model TransactionsDashViewModel
+
+
+<h1>Transactions</h1>
+
+<table class="table table-striped table-bordered" id="Grid">
+    <thead>
+        <tr>
+            <th>PayerAccount</th>
+            <th>PayerClientName</th>
+            <th>PayeeAccount</th>
+            <th>PayeeClientName</th>
+            <th>PaymentDescription</th>
+            <th>Ammount</th>
+            <th>PaymentStatus</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AllAccountTransactions)
+        {
+        <tr>
+            <td>
+                @item.PayerAccount
+            </td>
+            <td>
+
+                @item.PayerClientName
+            </td>
+            <td>
+                @item.PayeeAccount
+            </td>
+            <td>
+                @item.PayeeClientName
+            </td>
+            <td>
+                @item.PaymentDescription
+            </td>
+            <td>
+                @item.Ammount
+            </td>
+            <td>
+                @item.PaymentStatus
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

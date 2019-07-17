@@ -1,0 +1,31 @@
+﻿@model TransactionsViewModel
+@using Microsoft.Extensions.Primitives;
+
+
+
+@using (Html.BeginForm("CompleteTransaction", "User", FormMethod.Post))
+{
+    <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModal-label"></h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Are you sure you want to complete this transaction?</h4>
+                    <form class="col-lg-8" asp-area="Administration" asp-controller="Client" asp-action="AddClient" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input asp-for="@Model.Id" class="form-control" hidden />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="btnOK" onclick="">Yes</button>
+                    <button class="btn btn-default" data-dismiss="modal" id="btnCancel">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
